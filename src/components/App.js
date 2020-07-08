@@ -7,21 +7,44 @@ class App extends Component {
     players: [
       {
         name: "Guil",
+        score: 0,
         id: 1
       },
       {
         name: "Treasure",
+        score: 0,
         id: 2
       },
       {
         name: "Ashley",
+        score: 0,
         id: 3
       },
       {
         name: "James",
+        score: 0,
         id: 4
       }
     ]
+  }
+
+  handleScoreChange = (index, delta) => {
+    this.setState(prevState => {
+      // New 'players' array – a copy of the previous `players` state
+      const updatedPlayers = [...prevState.players];
+      // A copy of the player object we're targeting
+      const updatedPlayer = { ...updatedPlayers[index] };
+
+      // Update the target player's score
+      updatedPlayer.score += delta;
+      // Update the 'players' array with the target player's latest score
+      updatedPlayers[index] = updatedPlayer;
+
+      // Update the `players` state without mutating the original state
+      return {
+        players: updatedPlayers
+      }
+    });
   }
 
   handleRemovePlayer = (id) => {
@@ -36,12 +59,15 @@ class App extends Component {
         <Header title="Scorecard" totalPlayers={ this.state.players.length } />
   
         {/* Players */}
-        {this.state.players.map(player => (
+        {this.state.players.map((player, index) => (
           <Player  
             name={ player.name } 
             key={ player.id.toString() }
-            removePlayer={ this.handleRemovePlayer }
             id={ player.id }
+            score={ player.score }
+            index={ index }
+            removePlayer={ this.handleRemovePlayer }
+            changeScore={ this.handleScoreChange }
           />
         ))}
       </div>
