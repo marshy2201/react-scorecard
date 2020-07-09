@@ -71,26 +71,28 @@ class App extends Component {
   }
 
   render() {
+    const { players } = this.state;
+
     return (
       <div className="scoreboard">
         <Header 
           title="Scorecard" 
-          players={ this.state.players } 
+          players={players} 
         />
   
         {/* Players */}
-        {this.state.players.map((player, index) => (
+        {players.map((player, index) => (
           <Player  
-            name={ player.name } 
-            key={ player.id.toString() }
-            id={ player.id }
-            score={ player.score }
-            index={ index }
-            removePlayer={ this.handleRemovePlayer }
-            changeScore={ this.handleScoreChange }
+            name={player.name} 
+            key={player.id.toString()}
+            id={player.id}
+            score={player.score}
+            index={index}
+            removePlayer={this.handleRemovePlayer}
+            changeScore={this.handleScoreChange}
           />
         ))}
-        <AddPlayerForm addPlayer={ this.handleAddPlayer }/>
+        <AddPlayerForm addPlayer={this.handleAddPlayer}/>
       </div>
     );
   }
