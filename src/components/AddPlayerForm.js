@@ -1,37 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AddPlayerForm extends Component {
-  state = {
-    value: ''
-  }
+const AddPlayerForm = (props) => {
+  const playerInput = React.createRef();
 
-  handleValueChange = (e) => {
-    this.setState({ value: e.target.value });
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    this.props.addPlayer(this.state.value);
-    this.setState({ value: '' });
+    props.addPlayer(playerInput.current.value);
+    e.currentTarget.reset();
   }
 
-  render() {
-    const { value } = this.state;
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        placeholder="Enter a players name" 
+        ref={playerInput}
+      />
 
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Enter a players name" 
-          value={value} 
-          onChange={this.handleValueChange}
-        />
-
-        <input type="submit" value="Add Player" />
-      </form>
-    );
-  }
+      <input type="submit" value="Add Player" />
+    </form>
+  );
 }
 
-export default AddPlayerForm
+export default AddPlayerForm;
+
+
+/***** Using state instead of ref for the input *****/
+
+// import React, { Component } from 'react';
+
+// class AddPlayerForm extends Component {
+//   state = {
+//     value: ''
+//   }
+
+//   handleValueChange = (e) => {
+//     this.setState({ value: e.target.value });
+//   }
+
+//   handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     this.props.addPlayer(this.state.value);
+//     this.setState({ value: '' });
+//   }
+
+//   render() {
+//     const { value } = this.state;
+
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <input 
+//           type="text" 
+//           placeholder="Enter a players name" 
+//           value={value} 
+//           onChange={this.handleValueChange}
+//         />
+
+//         <input type="submit" value="Add Player" />
+//       </form>
+//     );
+//   }
+// }
+
+// export default AddPlayerForm;
