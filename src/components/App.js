@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Player from './Player';
+import AddPlayerForm from './AddPlayerForm';
 
 class App extends Component {
   state = {
@@ -28,6 +29,9 @@ class App extends Component {
     ]
   }
 
+  // prev player id
+  prevPlayerId = 4;
+
   handleScoreChange = (index, delta) => {
     this.setState(prevState => {
       // New 'players' array – a copy of the previous `players` state
@@ -45,6 +49,19 @@ class App extends Component {
         players: updatedPlayers
       }
     });
+  }
+
+  handleAddPlayer = (name) => {
+    this.setState(prevState => ({
+      players: [
+        ...prevState.players,
+        {
+          name,
+          score: 0,
+          id: this.prevPlayerId += 1
+        }
+      ]
+    }));
   }
 
   handleRemovePlayer = (id) => {
@@ -73,6 +90,7 @@ class App extends Component {
             changeScore={ this.handleScoreChange }
           />
         ))}
+        <AddPlayerForm addPlayer={ this.handleAddPlayer }/>
       </div>
     );
   }
