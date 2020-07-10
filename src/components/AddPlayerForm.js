@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddPlayerForm = (props) => {
+const AddPlayerForm = ({ addPlayer }) => {
   const playerInput = React.createRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addPlayer(playerInput.current.value);
+    addPlayer(playerInput.current.value);
     e.currentTarget.reset();
   }
 
