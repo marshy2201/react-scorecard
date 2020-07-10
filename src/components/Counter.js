@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Counter = ({ index, score, changeScore }) => {
   return (
@@ -8,6 +9,12 @@ const Counter = ({ index, score, changeScore }) => {
       <button className="counter-action increment" onClick={() => changeScore(index, 1)}> + </button>
     </div>
   );
+}
+
+Counter.propTypes = {
+  score: PropTypes.number,
+  index: PropTypes.number,
+  changeScore: PropTypes.func
 }
 
 export default Counter;

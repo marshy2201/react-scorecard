@@ -75,10 +75,7 @@ class App extends Component {
 
     return (
       <div className="scoreboard">
-        <Header 
-          title="Scorecard" 
-          players={players} 
-        />
+        <Header players={players} />
   
         {/* Players */}
         {players.map((player, index) => (

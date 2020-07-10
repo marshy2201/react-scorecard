@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Stats = ({ players }) => {
   const totalPlayers = players.length;
@@ -18,6 +19,10 @@ const Stats = ({ players }) => {
       </tbody>
     </table>
   );
+}
+
+Stats.propTypes = {
+  players: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Stats;
