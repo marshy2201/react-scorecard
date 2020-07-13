@@ -32,6 +32,17 @@ class App extends Component {
   // prev player id
   prevPlayerId = 4;
 
+  highestScore() {
+    const scores = this.state.players.map(player => player.score);
+    const highestScore = Math.max(...scores);
+    
+    if (highestScore) {
+      return highestScore;
+    } else {
+      return null;
+    }
+  }
+
   handleScoreChange = (index, delta) => {
     this.setState(prevState => {
       // New 'players' array – a copy of the previous `players` state
@@ -87,6 +98,7 @@ class App extends Component {
             index={index}
             removePlayer={this.handleRemovePlayer}
             changeScore={this.handleScoreChange}
+            isHighScore={player.score === this.highestScore()}
           />
         ))}
         <AddPlayerForm addPlayer={this.handleAddPlayer}/>
