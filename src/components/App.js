@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Player from './Player';
+import PlayerList from './PlayerList';
 import AddPlayerForm from './AddPlayerForm';
 
 class App extends Component {
@@ -31,17 +31,6 @@ class App extends Component {
 
   // prev player id
   prevPlayerId = 4;
-
-  highestScore() {
-    const scores = this.state.players.map(player => player.score);
-    const highestScore = Math.max(...scores);
-    
-    if (highestScore) {
-      return highestScore;
-    } else {
-      return null;
-    }
-  }
 
   handleScoreChange = (index, delta) => {
     this.setState(prevState => {
@@ -88,21 +77,14 @@ class App extends Component {
       <div className="scoreboard">
         <Header players={players} />
   
-        {/* Players */}
-        {players.map((player, index) => (
-          <Player  
-            name={player.name} 
-            key={player.id.toString()}
-            id={player.id}
-            score={player.score}
-            index={index}
+          <PlayerList 
+            players={players} 
             removePlayer={this.handleRemovePlayer}
             changeScore={this.handleScoreChange}
-            isHighScore={player.score === this.highestScore()}
           />
-        ))}
-        <AddPlayerForm addPlayer={this.handleAddPlayer}/>
-      </div>
+          
+          <AddPlayerForm addPlayer={this.handleAddPlayer} />
+        </div>
     );
   }
 }
