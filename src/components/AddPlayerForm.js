@@ -3,12 +3,12 @@ import { Consumer } from './context';
 
 const AddPlayerForm = () => (
   <Consumer>
-    {context => {
+    {({ actions }) => {
       const playerInput = React.createRef();
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        context.actions.addPlayer(playerInput.current.value);
+        actions.addPlayer(playerInput.current.value);
         e.currentTarget.reset();
       }
 

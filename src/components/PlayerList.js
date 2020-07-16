@@ -5,9 +5,9 @@ import { Consumer } from './context';
 const PlayerList = () => {
   return (
     <Consumer>
-      {context => {
+      {({ players }) => {
         const findHighestScore = () => {
-          const scores = context.players.map(player => player.score);
+          const scores = players.map(player => player.score);
           const highestScore = Math.max(...scores);
           
           if (highestScore) {
@@ -19,7 +19,7 @@ const PlayerList = () => {
 
         return (
           <React.Fragment>
-            {context.players.map((player, index) => (
+            {players.map((player, index) => (
               <Player  
                 {...player}
                 key={player.id.toString()}

@@ -3,9 +3,9 @@ import { Consumer } from './context';
 
 const Stats = () => (
   <Consumer>
-    {context => {
-      const totalPlayers = context.players.length;
-      const totalPoints = context.players.reduce((total, player) => total + player.score, 0);
+    {({ players }) => {
+      const totalPlayers = players.length;
+      const totalPoints = players.reduce((total, player) => total + player.score, 0);
 
       return (
         <table className="stats">

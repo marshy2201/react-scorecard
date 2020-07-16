@@ -25,9 +25,9 @@ class Player extends PureComponent {
     return ( 
       <div className="player">
         <Consumer>
-          {context => (
+          {({ actions }) => (
             <span className="player-name">
-              <button className="remove-player" onClick={() => context.actions.removePlayer(id)}>✖</button>
+              <button className="remove-player" onClick={() => actions.removePlayer(id)}>✖</button>
               <Icon isHighScore={isHighScore} />
               { name }
             </span>
