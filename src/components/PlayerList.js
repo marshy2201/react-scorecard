@@ -1,33 +1,36 @@
 import React from 'react';
 import Player from './Player';
+import { Consumer } from './context';
 
-const PlayerList = ({ players, removePlayer, changeScore, highestScore }) => {
-  const findHighestScore = () => {
-    const scores = players.map(player => player.score);
-    const highestScore = Math.max(...scores);
-    
-    if (highestScore) {
-      return highestScore;
-    } else {
-      return null;
-    }
-  }
-
+const PlayerList = () => {
   return (
-    <React.Fragment>
-      {players.map((player, index) => (
-        <Player  
-          name={player.name} 
-          key={player.id.toString()}
-          id={player.id}
-          score={player.score}
-          index={index}
-          removePlayer={removePlayer}
-          changeScore={changeScore}
-          isHighScore={player.score === findHighestScore()}
-        />
-      ))}
-    </React.Fragment>
+    <Consumer>
+      {context => {
+        const findHighestScore = () => {
+          const scores = context.players.map(player => player.score);
+          const highestScore = Math.max(...scores);
+          
+          if (highestScore) {
+            return highestScore;
+          } else {
+            return null;
+          }
+        }
+
+        return (
+          <React.Fragment>
+            {context.players.map((player, index) => (
+              <Player  
+                {...player}
+                key={player.id.toString()}
+                index={index}
+                isHighScore={player.score === findHighestScore()}
+              />
+            ))}
+          </React.Fragment>
+        );
+      }}
+    </Consumer>
   );
 }
 
