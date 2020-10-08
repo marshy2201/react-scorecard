@@ -100,7 +100,7 @@ svg {
 
 .scoreboard {
   background: #fff;
-  width: 700px;
+  max-width: 700px;
   margin: 70px auto;
   box-shadow: 0 2px 0 rgb(133, 104, 250);
   border-radius: 6px;
@@ -240,4 +240,26 @@ input[type=submit]:hover {
   font-family: monospace;
   font-size: 2em;
   line-height: 2em;
+}
+
+/* Media Queries */
+
+@media (max-width: 650px) {
+  header {
+    flex-direction: column;
+  }
+
+  header h1 {
+    order: -1;
+  }
+
+  .stopwatch {
+    width: 100%;
+    margin: -5px 0;
+  }
+
+  .stats {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
